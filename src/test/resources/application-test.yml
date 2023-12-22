@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/cafe?currentSchema=test
+    username: postgres
+    password: 1234
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:/liquibase/2023_changelog/23_11_initial_schema.yml

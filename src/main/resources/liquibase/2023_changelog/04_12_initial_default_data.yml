@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: init-sql/generate-users.sql
+  - include:
+      file: init-sql/generate-products.sql
+  - include:
+      file: init-sql/generate-orders.sql
+  - include:
+      file: init-sql/generate-order-items.sql
+  - include:
+      file: init-sql/generate-basket-items.sql

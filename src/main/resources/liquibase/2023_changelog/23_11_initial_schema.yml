@@ -1,0 +1,248 @@
+databaseChangeLog:
+  - logicalFilePath: liquibase/changelog/23_11_initial_schema.yml
+  - changeSet:
+      id: 23-11-001
+      author: peter
+      changes:
+        - createTable:
+            tableName: cafe_user
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+              - column:
+                  name: last_name
+                  type: varchar(50)
+              - column:
+                  name: phone_number
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: activated
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: activation_key
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reset_key
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: cafe_role
+            columns:
+              - column:
+                  name: role_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: role_name, user_id
+            tableName: cafe_role
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: cafe_role
+            constraintName: cafe_role_to_cafe_user_fk
+            referencedColumnNames: id
+            referencedTableName: cafe_user
+  - changeSet:
+      id: 23-11-002
+      author: peter
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: float
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: category
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: producer
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: availability
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image_path
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_deleted
+                  type: boolean
+                  defaultValue: false
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: cafe_order
+            columns:
+              - column:
+                  name: code
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: text
+                  constraints:
+                    nullable: true
+              - column:
+                  name: customer_id
+                  type: integer
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: customer_id
+            baseTableName: cafe_order
+            constraintName: cafe_order_to_cafe_user_fk
+            referencedColumnNames: id
+            referencedTableName: cafe_user
+        - createTable:
+            tableName: order_item
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+              - column:
+                  name: count
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_code
+                  type: uuid
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: order_item
+            constraintName: order_item_to_product_fk
+            referencedColumnNames: id
+            referencedTableName: product
+        - addForeignKeyConstraint:
+            baseColumnNames: order_code
+            baseTableName: order_item
+            constraintName: order_item_to_cafe_order_fk
+            referencedColumnNames: code
+            referencedTableName: cafe_order
+        - createTable:
+            tableName: basket_item
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: count
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: basket_item
+            constraintName: basket_item_to_product_fk
+            referencedColumnNames: id
+            referencedTableName: product
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: basket_item
+            constraintName: basket_item_to_cafe_user_fk
+            referencedColumnNames: id
+            referencedTableName: cafe_user
+              
+            
+        
+            
+                  

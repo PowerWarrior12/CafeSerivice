@@ -1,0 +1,15 @@
+insert into cafe_order values
+('bbb73c60-c43f-41e8-bf13-e07d363e6c0c', '2023-11-27 08:14:12', 'RECEIVED', 'comment', '1'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c0a', '2023-11-27 09:14:12', 'CANCELED', 'comment', '2'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c0b', '2023-11-27 10:14:12', 'READY', 'comment', '1'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c0d', '2023-11-26 08:14:12', 'READY', 'comment', '3'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c0e', '2023-11-27 08:14:12', 'RECEIVED', 'comment', '1'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c0f', '2023-11-26 09:10:12', 'READY', 'comment', '2'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c1c', '2023-11-27 08:30:12', 'RECEIVED', 'comment', '1'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c8c', '2023-11-26 08:54:12', 'READY', 'comment', '3'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c7c', '2023-11-22 08:14:12', 'RECEIVED', 'comment', '1'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c6c', '2023-11-24 08:14:12', 'RECEIVED', 'comment', '2'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c5c', '2023-11-27 08:14:12', 'IN_PROCESS', 'comment', '1'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c4c', '2023-11-23 12:14:12', 'RECEIVED', 'comment', '3'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c3c', '2023-11-27 08:14:12', 'READY', 'comment', '2'),
+('bbb73c60-c43f-41e8-bf13-e07d363e6c2c', '2023-11-22 08:14:12', 'IN_PROCESS', 'comment', '1');

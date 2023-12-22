@@ -1,0 +1,17 @@
+insert into product(title, price, description, category, producer, availability, image_path) values
+('product1', 100, 'description', 'category1', 'producer2', 'true', 'image_path.jpg'),
+('product2', 50, 'description', 'category1', 'producer1', 'true', 'image_path.jpg'),
+('product3', 130, 'description', 'category2', 'producer2', 'true', 'image_path.jpg'),
+('product4', 70, 'description', 'category1', 'producer1', 'true', 'image_path.jpg'),
+('product5', 60, 'description', 'category2', 'producer1', 'false', 'image_path.jpg'),
+('tovar6', 320, 'description', 'category1', 'producer2', 'true', 'image_path.jpg'),
+('product7', 120, 'description', 'category2', 'producer2', 'true', 'image_path.jpg'),
+('product8', 540, 'description', 'category1', 'producer2', 'true', 'image_path.jpg'),
+('product9', 71, 'description', 'category2', 'producer2', 'false', 'image_path.jpg'),
+('tovar10', 15, 'description', 'category1', 'producer1', 'true', 'image_path.jpg'),
+('product11', 50, 'description', 'category2', 'producer1', 'true', 'image_path.jpg'),
+('product12', 132, 'description', 'category2', 'producer1', 'true', 'image_path.jpg'),
+('tovar13', 123, 'description', 'category1', 'producer1', 'true', 'image_path.jpg'),
+('product14', 44, 'description', 'category1', 'producer2', 'true', 'image_path.jpg'),
+('product15', 17, 'description', 'category2', 'producer2', 'true', 'image_path.jpg'),
+('product16', 79, 'description', 'category2', 'producer1', 'true', 'image_path.jpg');

@@ -1,0 +1,17 @@
+insert into order_item(count, product_id, order_code) values
+(3, 1, 'bbb73c60-c43f-41e8-bf13-e07d363e6c0c'),
+(1, 2, 'bbb73c60-c43f-41e8-bf13-e07d363e6c0a'),
+(2, 3, 'bbb73c60-c43f-41e8-bf13-e07d363e6c0b'),
+(1, 7, 'bbb73c60-c43f-41e8-bf13-e07d363e6c4c'),
+(1, 3, 'bbb73c60-c43f-41e8-bf13-e07d363e6c0e'),
+(1, 1, 'bbb73c60-c43f-41e8-bf13-e07d363e6c0f'),
+(2, 1, 'bbb73c60-c43f-41e8-bf13-e07d363e6c1c'),
+(3, 2, 'bbb73c60-c43f-41e8-bf13-e07d363e6c2c'),
+(3, 3, 'bbb73c60-c43f-41e8-bf13-e07d363e6c3c'),
+(2, 1, 'bbb73c60-c43f-41e8-bf13-e07d363e6c4c'),
+(1, 1, 'bbb73c60-c43f-41e8-bf13-e07d363e6c5c'),
+(1, 3, 'bbb73c60-c43f-41e8-bf13-e07d363e6c6c'),
+(3, 4, 'bbb73c60-c43f-41e8-bf13-e07d363e6c7c'),
+(2, 5, 'bbb73c60-c43f-41e8-bf13-e07d363e6c8c'),
+(3, 1, 'bbb73c60-c43f-41e8-bf13-e07d363e6c6c'),
+(3, 2, 'bbb73c60-c43f-41e8-bf13-e07d363e6c4c');

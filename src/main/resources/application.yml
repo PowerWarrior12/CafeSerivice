@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+hostname: localhost:8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/cafe?currentSchema=dev
+    username: postgres
+    password: 1234
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:/liquibase/liquibase.yml
+  mail:
+    host: smtp.mail.ru
+    username: businessmail1710@mail.ru
+    password: xRk45kDjggJkeHifwJtf
+    port: 465
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+mail:
+  debug: false
+  
+jwt:
+  duration: 24h
+  issuer: cafe-issuer
+  secret: bXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdzbXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdzbXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdzbXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdz
+
+images:
+  directory:
+    path: ${IMAGE_DIR:C:/Users/user/Desktop/images}

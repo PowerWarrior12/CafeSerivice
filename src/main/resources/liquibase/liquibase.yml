@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/2023_changelog/23_11_initial_schema.yml
+  - include:
+      file: liquibase/2023_changelog/04_12_initial_default_data.yml
