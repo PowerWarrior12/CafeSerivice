@@ -31,12 +31,12 @@ class BasketControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    @DisplayName("[200] POST /api/basket/add add product to basket process in successful case")
+    @DisplayName("[200] POST /api/basket add product to basket process in successful case")
     void addProductToBasket() throws Exception {
         AddProductIntoBasketRequest request = BasketGenerator.generateAddProductIntoBasketRequest();
         int expectedIdOfBasketItem = 17;
 
-        mockMvc.perform(post("/api/basket/add")
+        mockMvc.perform(post("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -44,11 +44,11 @@ class BasketControllerTest {
     }
 
     @Test
-    @DisplayName("[200] POST /api/basket/update update basket item process in successful case")
+    @DisplayName("[200] PUT /api/basket update basket item process in successful case")
     void updateBasket() throws Exception {
         UpdateBasketRequest request = BasketGenerator.generateUpdateBasketRequest();
 
-        mockMvc.perform(post("/api/basket/update")
+        mockMvc.perform(put("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())

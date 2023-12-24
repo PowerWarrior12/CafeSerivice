@@ -1,6 +1,7 @@
 package com.simbirsoft.repositories;
 
 import com.simbirsoft.domain.Order;
+import com.simbirsoft.repositories.projection.DailyOrdersReportProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,6 +28,18 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
             " left join fetch Product product on orderItem.productId = product.id" +
             " where order.customerId in :customersIds")
     List<Order> findOrdersByCustomerIds(@Param("customersIds") List<Integer> customersIds);
+
+    @Query("select function('DATE_TRUNC', 'day', order.date) as date," +
+            " product.title as productTitle," +
+            " sum(orderItem.count) as count," +
+            " sum(product.price * orderItem.count) as totalPrice" +
+            " from Order order" +
+            " join fetch OrderItem orderItem on order.code = orderItem.orderCode" +
+            " join fetch Product product on orderItem.productId = product.id" +
+            " where order.status = 'READY'" +
+            " group by function('DATE_TRUNC', 'day', order.date), product.id" +
+            " order by function('DATE_TRUNC', 'day', order.date) asc")
+    List<DailyOrdersReportProjection> getDailyOrdersReport();
 
     static int DEFAULT_PAGE_SIZE = 100;
 }

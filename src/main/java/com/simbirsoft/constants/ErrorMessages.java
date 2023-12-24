@@ -30,4 +30,8 @@ public class ErrorMessages {
     // region Basket
     public static final String BASKET_ITEM_NOT_FOUND = "Basket item did not found";
     // endregion
+    // region Report
+    public static final String REPORT_EXCEPTION = "Internal exception with report generation";
+    public static final String REPORT_HANDLER_EXCEPTION = "Can't find generator for report type";
+    // endregion
 }

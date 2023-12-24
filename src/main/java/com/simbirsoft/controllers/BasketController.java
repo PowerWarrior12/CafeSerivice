@@ -15,14 +15,14 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class BasketController {
     private final BasketService basketService;
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Integer> addProductToBasket(
             @RequestBody AddProductIntoBasketRequest request,
             Principal principal
     ) {
         return ResponseEntity.ok(basketService.addNewBasketItem(request, principal.getName()));
     }
-    @PostMapping("/update")
+    @PutMapping
     public ResponseEntity<String> updateBasket(
             @RequestBody UpdateBasketRequest request,
             Principal principal

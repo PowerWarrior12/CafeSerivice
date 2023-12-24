@@ -39,3 +39,17 @@ jwt:
 images:
   directory:
     path: ${IMAGE_DIR:C:/Users/user/Desktop/images}
+
+report:
+  xlsx:
+    products:
+      dateFormat: yyyy-MM-dd
+      header:
+        values: Product title, Count, Total price
+        isBold: true
+        fontHeight: 15
+        isBorder: true
+      data:
+        isBold: false
+        fontHeight: 12
+        isBorder: false

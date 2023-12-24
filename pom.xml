@@ -16,6 +16,7 @@
     <lombok.version>1.18.30</lombok.version>
     <mapstruct.version>1.5.5.Final</mapstruct.version>
     <spring.doc.version>2.3.0</spring.doc.version>
+    <org.apache.poi>5.2.5</org.apache.poi>
   </properties>
 
   <dependencyManagement>
@@ -87,6 +88,17 @@
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
       <version>${spring.doc.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${org.apache.poi}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>${org.apache.poi}</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>

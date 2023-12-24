@@ -6,8 +6,10 @@ import com.simbirsoft.dto.order.CustomerOrderResponse;
 import com.simbirsoft.dto.order.OrderFilterRequest;
 import com.simbirsoft.dto.product.CreateProductRequest;
 import com.simbirsoft.dto.product.UpdateProductRequest;
+import com.simbirsoft.services.reports.ReportType;
 import com.simbirsoft.services.OrderService;
 import com.simbirsoft.services.ProductService;
+import com.simbirsoft.services.ReportService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.UUID;
 public class AdminController {
     private final ProductService productService;
     private final OrderService orderService;
+    private final ReportService reportService;
 
     @PostMapping("/products/add")
     public ResponseEntity<Integer> createProduct(
@@ -55,5 +58,9 @@ public class AdminController {
             @RequestParam("status") OrderStatus status,
             @RequestParam("orderCode") UUID orderCode) {
         return ResponseEntity.ok(orderService.changeOrderStatus(new ChangeOrderStatusRequest(status, orderCode)));
+    }
+    @GetMapping("/report")
+    public ResponseEntity<byte[]> getReport(@RequestParam("reportType") ReportType reportType) {
+        return ResponseEntity.ok(reportService.generateReport(reportType));
     }
 }
