@@ -35,6 +35,7 @@ jwt:
   duration: 24h
   issuer: cafe-issuer
   secret: bXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdzbXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdzbXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdzbXlfc2VjcmV0X2Zvcl9zb21lX3RoaW5nc215X3NlY3JldF9mb3Jfc29tZV90aGluZ3NteV9zZWNyZXRfZm9yX3NvbWVfdGhpbmdz
+  header: Authorization
 
 images:
   directory:
@@ -53,3 +54,7 @@ report:
         isBold: false
         fontHeight: 12
         isBorder: false
+        
+websocket:
+  admin:
+    secret: secret

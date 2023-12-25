@@ -1,6 +1,5 @@
 package com.simbirsoft.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simbirsoft.IntegrationTest;
 import com.simbirsoft.common.BasketGenerator;
@@ -15,10 +14,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.simbirsoft.common.TestConstants.SIMPLE_USER_LOGIN;
+import static com.simbirsoft.constants.OkMessages.BASKET_UPDATED_OK;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static com.simbirsoft.constants.OkMessages.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @IntegrationTest
 @WithUserDetails(SIMPLE_USER_LOGIN)

@@ -2,6 +2,7 @@ package com.simbirsoft.repositories;
 
 import com.simbirsoft.domain.Order;
 import com.simbirsoft.repositories.projection.DailyOrdersReportProjection;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -40,6 +42,13 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
             " group by function('DATE_TRUNC', 'day', order.date), product.id" +
             " order by function('DATE_TRUNC', 'day', order.date) asc")
     List<DailyOrdersReportProjection> getDailyOrdersReport();
+
+    @Query("select order from Order order" +
+            " left join fetch OrderItem orderItem on orderItem.orderCode = order.code" +
+            " left join fetch Product product on orderItem.productId = product.id" +
+            " where order.code = :code")
+    @CacheEvict(value = "orders", allEntries = true)
+    Optional<Order> findOrderByCode(@Param("code") UUID code);
 
     static int DEFAULT_PAGE_SIZE = 100;
 }

@@ -21,13 +21,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.simbirsoft.constants.ErrorMessages.LOGIN_NOT_FOUND;
 import static com.simbirsoft.constants.ErrorMessages.ORDER_NOT_FOUNT;
-import static com.simbirsoft.constants.OkMessages.ADD_ORDER_OK;
-import static com.simbirsoft.constants.OkMessages.CHANGE_ORDER_STATUS_OK;
 
-@Service
+@Service("orderService")
 @RequiredArgsConstructor
 @Log4j2
 public class OrderServiceImpl implements OrderService {
@@ -36,6 +37,7 @@ public class OrderServiceImpl implements OrderService {
     private final UserRepository userRepository;
     private final OrderMapper orderMapper;
     private final OrderItemMapper orderItemMapper;
+
     @Override
     @Transactional(readOnly = true)
     public PageOrderResponse getCustomersOrders(String customerLogin, CustomerOrderFilterRequest request) {
@@ -44,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
                 .orElseThrow(() -> {
                     log.atDebug().log(String.format("Get customers orders process: user with login %s are not exists",
                             customerLogin));
-                   return new ApiRequestException(LOGIN_NOT_FOUND, HttpStatus.NOT_FOUND);
+                    return new ApiRequestException(LOGIN_NOT_FOUND, HttpStatus.NOT_FOUND);
                 });
         Page<Order> orderPage = orderRepository.findOrderByCustomerId(user.getId(), generatePageable(request));
         return orderMapper.pageOrderToPageOrderResponse(orderPage);
@@ -66,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public String addOrder(CreateOrderRequest createOrderRequest, String login) {
+    public UUID addOrder(CreateOrderRequest createOrderRequest, String login) {
         log.atDebug().log(String.format("Add order process: start for login: %s and order: %s", login, createOrderRequest));
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> {
@@ -74,17 +76,18 @@ public class OrderServiceImpl implements OrderService {
                     return new ApiRequestException(LOGIN_NOT_FOUND, HttpStatus.NOT_FOUND);
                 });
         Order order = orderMapper.createOrderRequestToOrder(createOrderRequest, user.getId());
+        Set<OrderItem> orderItems = createOrderRequest.getOrderItemRequestList().stream()
+                .map(request -> orderItemMapper.createOrderItemRequestToOrderItem(request, order.getCode()))
+                .collect(Collectors.toSet());
         orderRepository.saveAndFlush(order);
-        List<OrderItem> orderItems = createOrderRequest.getOrderItemRequestList().stream()
-                        .map(request -> orderItemMapper.createOrderItemRequestToOrderItem(request, order.getCode()))
-                        .toList();
         orderItemRepository.saveAllAndFlush(orderItems);
-        return ADD_ORDER_OK;
+
+        return order.getCode();
     }
 
     @Override
     @Transactional
-    public String changeOrderStatus(ChangeOrderStatusRequest request) {
+    public CustomerOrderResponse changeOrderStatus(ChangeOrderStatusRequest request) {
         log.atDebug().log(String.format("Change order status process: start with order code: %s and new order status: %s",
                 request.getOrderCode(),
                 request.getStatus()));
@@ -95,7 +98,8 @@ public class OrderServiceImpl implements OrderService {
                 });
         order.setStatus(request.getStatus());
         orderRepository.flush();
-        return CHANGE_ORDER_STATUS_OK;
+
+        return orderMapper.orderToCustomerOrderResponse(order);
     }
 
     private Pageable generatePageable(CustomerOrderFilterRequest request) {

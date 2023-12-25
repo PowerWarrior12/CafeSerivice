@@ -1,9 +1,9 @@
 package com.simbirsoft.services.impl;
 
 import com.simbirsoft.exceptions.ApiRequestException;
+import com.simbirsoft.services.ReportService;
 import com.simbirsoft.services.reports.ReportGenerator;
 import com.simbirsoft.services.reports.ReportType;
-import com.simbirsoft.services.ReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;

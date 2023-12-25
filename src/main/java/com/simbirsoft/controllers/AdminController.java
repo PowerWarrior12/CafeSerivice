@@ -6,10 +6,10 @@ import com.simbirsoft.dto.order.CustomerOrderResponse;
 import com.simbirsoft.dto.order.OrderFilterRequest;
 import com.simbirsoft.dto.product.CreateProductRequest;
 import com.simbirsoft.dto.product.UpdateProductRequest;
-import com.simbirsoft.services.reports.ReportType;
 import com.simbirsoft.services.OrderService;
 import com.simbirsoft.services.ProductService;
 import com.simbirsoft.services.ReportService;
+import com.simbirsoft.services.reports.ReportType;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
+
+import static com.simbirsoft.constants.OkMessages.CHANGE_ORDER_STATUS_OK;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -57,7 +59,8 @@ public class AdminController {
     public ResponseEntity<String> changeOrderStatus(
             @RequestParam("status") OrderStatus status,
             @RequestParam("orderCode") UUID orderCode) {
-        return ResponseEntity.ok(orderService.changeOrderStatus(new ChangeOrderStatusRequest(status, orderCode)));
+        orderService.changeOrderStatus(new ChangeOrderStatusRequest(status, orderCode));
+        return ResponseEntity.ok(CHANGE_ORDER_STATUS_OK);
     }
     @GetMapping("/report")
     public ResponseEntity<byte[]> getReport(@RequestParam("reportType") ReportType reportType) {

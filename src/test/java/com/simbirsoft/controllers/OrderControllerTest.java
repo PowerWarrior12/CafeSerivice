@@ -1,22 +1,21 @@
 package com.simbirsoft.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simbirsoft.IntegrationTest;
 import com.simbirsoft.common.OrderGenerator;
 import com.simbirsoft.dto.order.CreateOrderRequest;
+import com.simbirsoft.services.NotificationService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.simbirsoft.common.TestConstants.SIMPLE_USER_LOGIN;
-import static com.simbirsoft.constants.OkMessages.ADD_ORDER_OK;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -31,7 +30,8 @@ class OrderControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-
+    @MockBean
+    private NotificationService notificationService;
     @Test
     @DisplayName("[200] GET /api/orders?page=?&pageSize=? get orders by user in successful case")
     void getOrders() throws Exception {
@@ -60,6 +60,6 @@ class OrderControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", is(ADD_ORDER_OK)));
+                .andExpect(jsonPath("$", any(String.class)));
     }
 }

@@ -1,6 +1,5 @@
 package com.simbirsoft.configurations;
 
-import com.simbirsoft.domain.enums.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

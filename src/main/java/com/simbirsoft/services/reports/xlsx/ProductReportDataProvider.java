@@ -1,9 +1,9 @@
 package com.simbirsoft.services.reports.xlsx;
 
-import com.simbirsoft.services.reports.ReportDataProvider;
-import com.simbirsoft.services.reports.xlsx.data.XlsxTableReportData;
 import com.simbirsoft.repositories.OrderRepository;
 import com.simbirsoft.services.mappers.order.OrderMapper;
+import com.simbirsoft.services.reports.ReportDataProvider;
+import com.simbirsoft.services.reports.xlsx.data.XlsxTableReportData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;

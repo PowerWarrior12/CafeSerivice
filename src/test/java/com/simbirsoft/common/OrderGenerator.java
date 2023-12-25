@@ -4,7 +4,6 @@ import com.simbirsoft.dto.order.CreateOrderItemRequest;
 import com.simbirsoft.dto.order.CreateOrderRequest;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 

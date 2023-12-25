@@ -5,32 +5,26 @@ import com.simbirsoft.IntegrationTest;
 import com.simbirsoft.common.ImageGenerator;
 import com.simbirsoft.common.ProductGenerator;
 import com.simbirsoft.domain.enums.OrderStatus;
-import com.simbirsoft.dto.order.CustomerOrderResponse;
 import com.simbirsoft.dto.product.CreateProductRequest;
 import com.simbirsoft.dto.product.UpdateProductRequest;
-import com.simbirsoft.repositories.OrderRepository;
-import com.simbirsoft.repositories.ProductRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-
-import static com.simbirsoft.constants.OkMessages.*;
-import static org.hamcrest.Matchers.*;
 import static com.simbirsoft.common.TestConstants.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.simbirsoft.constants.OkMessages.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @IntegrationTest
 @WithUserDetails(USER_LOGIN)
@@ -41,6 +35,8 @@ class AdminControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
+    @MockBean
+    private SimpMessagingTemplate messagingTemplate;
 
     @Test
     @DisplayName("[200] POST /api/admin/products/add add product process in successful case")

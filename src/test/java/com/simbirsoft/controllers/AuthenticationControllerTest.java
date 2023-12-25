@@ -2,34 +2,29 @@ package com.simbirsoft.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simbirsoft.IntegrationTest;
-import com.simbirsoft.common.KeyGenerator;
 import com.simbirsoft.common.UserGenerator;
 import com.simbirsoft.domain.User;
 import com.simbirsoft.dto.authentication.AuthenticationRequest;
 import com.simbirsoft.dto.user.RegistrationRequest;
 import com.simbirsoft.dto.user.ResetPasswordRequest;
 import com.simbirsoft.repositories.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.web.client.RestTemplate;
 
 import static com.simbirsoft.common.TestConstants.*;
-import static com.simbirsoft.constants.ErrorMessages.*;
+import static com.simbirsoft.constants.ErrorMessages.LOGIN_NOT_FOUND;
 import static com.simbirsoft.constants.OkMessages.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.any;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @IntegrationTest
